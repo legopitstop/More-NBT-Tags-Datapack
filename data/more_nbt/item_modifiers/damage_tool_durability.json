@@ -1,0 +1,21 @@
+[
+    {
+        "function": "copy_nbt",
+        "source": {
+            "type": "storage",
+            "source": "more_nbt:global_storage"
+        },
+        "ops": [
+            {
+                "source": "damage_tool.Damage",
+                "target": "current_durability.value",
+                "op": "replace"
+            },
+            {
+                "source": "durability.Damage",
+                "target": "Damage",
+                "op": "replace"
+            }
+        ]
+    }
+]

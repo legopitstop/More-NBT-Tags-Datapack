@@ -1,0 +1,21 @@
+[
+    {
+        "function": "copy_nbt",
+        "source": {
+            "type": "storage",
+            "source": "more_nbt:global_storage"
+        },
+        "ops": [
+            {
+                "source": "displayPreset.Name",
+                "target": "display.Name",
+                "op": "replace"
+            },
+            {
+                "source": "displayPreset.Lore",
+                "target": "display.Lore",
+                "op": "replace"
+            }
+        ]
+    }
+]

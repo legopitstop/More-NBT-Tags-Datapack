@@ -1,0 +1,16 @@
+[
+    {
+        "function": "copy_nbt",
+        "source": {
+            "type": "storage",
+            "source": "more_nbt:global_storage"
+        },
+        "ops": [
+            {
+                "source": "durability.max_durability",
+                "target": "current_durability.value",
+                "op": "replace"
+            }
+        ]
+    }
+]

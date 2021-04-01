@@ -1,0 +1,21 @@
+[
+    {
+        "function": "copy_nbt",
+        "source": {
+            "type": "storage",
+            "source": "more_nbt:global_storage"
+        },
+        "ops": [
+            {
+                "source": "used.has_been_used",
+                "target": "used.has_been_used",
+                "op": "replace"
+            },
+            {
+                "source": "used.times_used",
+                "target": "used.times_used",
+                "op": "replace"
+            }
+        ]
+    }
+]

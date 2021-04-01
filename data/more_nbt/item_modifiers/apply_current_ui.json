@@ -1,0 +1,16 @@
+[
+    {
+        "function": "copy_nbt",
+        "source": {
+            "type": "storage",
+            "source": "more_nbt:global_storage"
+        },
+        "ops": [
+            {
+                "source": "current_ui",
+                "target": "new_ui.current_ui",
+                "op": "replace"
+            }
+        ]
+    }
+]

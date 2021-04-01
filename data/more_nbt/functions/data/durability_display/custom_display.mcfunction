@@ -1,0 +1,15 @@
+# Desc: grabs item data and applies the RAW JSON to actionbar
+#
+# Called By: more_nbt:main_tick
+# location=actionbar
+execute at @p[nbt={SelectedItem:{tag:{durability:{custom_display:{location:"actionbar"}}}}}] if score @p durabilityPer matches ..0 run title @p actionbar [{"entity":"@p","nbt":"SelectedItem.tag.durability.custom_display.values[0]","interpret":true}]
+execute at @p[nbt={SelectedItem:{tag:{durability:{custom_display:{location:"actionbar"}}}}}] if score @p durabilityPer matches 1..10 run title @p actionbar [{"entity":"@p","nbt":"SelectedItem.tag.durability.custom_display.values[1]","interpret":true}]
+execute at @p[nbt={SelectedItem:{tag:{durability:{custom_display:{location:"actionbar"}}}}}] if score @p durabilityPer matches 11..20 run title @p actionbar [{"entity":"@p","nbt":"SelectedItem.tag.durability.custom_display.values[2]","interpret":true}]
+execute at @p[nbt={SelectedItem:{tag:{durability:{custom_display:{location:"actionbar"}}}}}] if score @p durabilityPer matches 21..30 run title @p actionbar [{"entity":"@p","nbt":"SelectedItem.tag.durability.custom_display.values[3]","interpret":true}]
+execute at @p[nbt={SelectedItem:{tag:{durability:{custom_display:{location:"actionbar"}}}}}] if score @p durabilityPer matches 31..40 run title @p actionbar [{"entity":"@p","nbt":"SelectedItem.tag.durability.custom_display.values[4]","interpret":true}]
+execute at @p[nbt={SelectedItem:{tag:{durability:{custom_display:{location:"actionbar"}}}}}] if score @p durabilityPer matches 41..50 run title @p actionbar [{"entity":"@p","nbt":"SelectedItem.tag.durability.custom_display.values[5]","interpret":true}]
+execute at @p[nbt={SelectedItem:{tag:{durability:{custom_display:{location:"actionbar"}}}}}] if score @p durabilityPer matches 51..60 run title @p actionbar [{"entity":"@p","nbt":"SelectedItem.tag.durability.custom_display.values[6]","interpret":true}]
+execute at @p[nbt={SelectedItem:{tag:{durability:{custom_display:{location:"actionbar"}}}}}] if score @p durabilityPer matches 61..70 run title @p actionbar [{"entity":"@p","nbt":"SelectedItem.tag.durability.custom_display.values[7]","interpret":true}]
+execute at @p[nbt={SelectedItem:{tag:{durability:{custom_display:{location:"actionbar"}}}}}] if score @p durabilityPer matches 71..80 run title @p actionbar [{"entity":"@p","nbt":"SelectedItem.tag.durability.custom_display.values[8]","interpret":true}]
+execute at @p[nbt={SelectedItem:{tag:{durability:{custom_display:{location:"actionbar"}}}}}] if score @p durabilityPer matches 81..90 run title @p actionbar [{"entity":"@p","nbt":"SelectedItem.tag.durability.custom_display.values[9]","interpret":true}]
+execute at @p[nbt={SelectedItem:{tag:{durability:{custom_display:{location:"actionbar"}}}}}] if score @p durabilityPer matches 91..100 run title @p actionbar [{"entity":"@p","nbt":"SelectedItem.tag.durability.custom_display.values[10]","interpret":true}]

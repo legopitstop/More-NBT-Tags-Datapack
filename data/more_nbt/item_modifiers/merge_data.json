@@ -1,0 +1,36 @@
+[
+    {
+        "function": "copy_nbt",
+        "source": {
+            "type": "storage",
+            "source": "more_nbt:global_storage"
+        },
+        "ops": [
+            {
+                "source": "merge_data.CustomModelData",
+                "target": "CustomModelData",
+                "op": "replace"
+            },
+            {
+                "source": "merge_data.Damage",
+                "target": "Damage",
+                "op": "replace"
+            },
+            {
+                "source": "merge_data.HideFlags",
+                "target": "HideFlags",
+                "op": "replace"
+            },
+            {
+                "source": "merge_data.Unbreakable",
+                "target": "Unbreakable",
+                "op": "replace"
+            },
+            {
+                "source": "merge_data.RepairCost",
+                "target": "RepairCost",
+                "op": "replace"
+            }
+        ]
+    }
+]

@@ -1,0 +1,16 @@
+[
+    {
+        "function": "copy_nbt",
+        "source": {
+            "type": "storage",
+            "source": "this"
+        },
+        "ops": [
+            {
+                "source": "onUse.place_structure.name",
+                "target": "name",
+                "op": "replace"
+            }
+        ]
+    }
+]

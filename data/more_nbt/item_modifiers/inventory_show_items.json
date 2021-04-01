@@ -1,0 +1,16 @@
+[
+    {
+        "function": "copy_nbt",
+        "source": {
+            "type": "storage",
+            "source": "more_nbt:global_storage"
+        },
+        "ops": [
+            {
+                "source": "Inventory.Lore",
+                "target": "display.Lore",
+                "op": "replace"
+            }
+        ]
+    }
+]

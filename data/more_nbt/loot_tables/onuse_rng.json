@@ -1,0 +1,39 @@
+{
+    "pools": [
+        {
+            "rolls": {
+                "type": "minecraft:uniform",
+                "min": {
+                    "type": "minecraft:score",
+                    "target": {
+                        "type": "minecraft:fixed",
+                        "name": "min"
+                    },
+                    "score": "onUse.random",
+                    "scale": 1
+                },
+                "max": {
+                    "type": "minecraft:score",
+                    "target": {
+                        "type": "minecraft:fixed",
+                        "name": "max"
+                    },
+                    "score": "onUse.random",
+                    "scale": 1
+                }
+            },
+            "entries": [
+                {
+                    "type": "minecraft:item",
+                    "name": "minecraft:stone",
+                    "functions": [
+                        {
+                            "function": "minecraft:set_count",
+                            "count": 0
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
