@@ -1,0 +1,9 @@
+# Runs when the server/world starts up.
+#
+# Called By: #minecraft:load
+
+# Register Datapack
+data modify storage legopitstop:registered_datapacks datapacks merge value {more_nbt:{namespace:"more_nbt",pack_version:"1.5.0",mc_version:"1.17",multiplayer_tested:"no",has_config:"yes",pack:{title:"More Nbt",description:"Adds more NBT tags.",uuid:"()b46168bb-c0c1-48de-9734-f52ba8b45241"}}}
+
+# Reload Message
+tellraw @a ["",{"storage":"legopitstop:registered_datapacks","nbt":"datapacks.more_nbt.pack.title","color":"yellow","hoverEvent":{"action":"show_text","contents":{"storage":"legopitstop:registered_datapacks","nbt":"datapacks.more_nbt.pack.description","color":"white"}}}," ",{"translate":"[%s]","color":"green","with":[{"storage":"legopitstop:registered_datapacks","nbt":"datapacks.more_nbt.pack_version"}],"hoverEvent": {"action":"show_text","contents":["",{"translate":"Pack Version: %s","color":"white","with":[{"storage":"legopitstop:registered_datapacks","nbt":"datapacks.more_nbt.pack_version","color":"gray"}]},"\n",{"translate":"MC Version: %s","color":"white","with":[{"storage":"legopitstop:registered_datapacks","nbt":"datapacks.more_nbt.mc_version","color":"gray"}]}]}}," ",{"text":"ℹ","color":"blue","hoverEvent": {"action":"show_text","contents": ["",{"translate":"Namespace(s): %s","color":"white","with":[{"storage":"legopitstop:registered_datapacks","nbt":"datapacks.more_nbt.namespace","color":"gray"}]},"\n",{"translate":"Has Config: %s","color":"white","with":[{"storage":"legopitstop:registered_datapacks","nbt":"datapacks.more_nbt.has_config","color":"gray"}]},"\n",{"translate":"Multiplayer Tested: %s","color":"white","with":[{"storage":"legopitstop:registered_datapacks","nbt":"datapacks.more_nbt.multiplayer_tested","color":"gray"}]}]}}]

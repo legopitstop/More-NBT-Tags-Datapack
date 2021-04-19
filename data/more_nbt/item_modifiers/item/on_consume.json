@@ -1,0 +1,21 @@
+[
+    {
+        "function": "copy_nbt",
+        "source": {
+            "type": "storage",
+            "source": "more_nbt:util"
+        },
+        "ops": [
+            {
+                "source": "food.on_consume.id",
+                "target": "SelectedItem.id",
+                "op": "replace"
+            },
+            {
+                "source": "food.on_consume.tag",
+                "target": "SelectedItem.tag",
+                "op": "replace"
+            }
+        ]
+    }
+]

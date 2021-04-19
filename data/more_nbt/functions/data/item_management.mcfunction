@@ -1,6 +1,6 @@
 # Desc: removes any/all items that have the tag "illegal:1b"
 #
-# Called By: 
+# Called By: more_nbt:main_tick
 
 # illegal items in creative the table will act as a creative tab.
 # KEEP!! remove 'NoGroundItem' tag from item when in players inv

@@ -1,0 +1,21 @@
+{
+    "condition": "minecraft:time_check",
+    "value": {
+        "min": {
+            "type": "minecraft:score",
+            "target": {
+                "type": "minecraft:fixed",
+                "name": "time_check_min"
+            },
+            "score": "EntityConditions"
+        },
+        "max": {
+            "type": "minecraft:score",
+            "target": {
+                "type": "minecraft:fixed",
+                "name": "time_check_max"
+            },
+            "score": "EntityConditions"
+        }
+    }
+}

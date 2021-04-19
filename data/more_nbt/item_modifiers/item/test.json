@@ -1,0 +1,12 @@
+{
+    "function": "minecraft:set_count",
+    "count": {
+        "type": "minecraft:score",
+        "target": {
+            "type": "minecraft:fixed",
+            "name": "Count"
+        },
+        "score": "util",
+        "scale": 1
+    }
+}

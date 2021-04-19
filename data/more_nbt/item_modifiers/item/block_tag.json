@@ -1,0 +1,16 @@
+[
+    {
+        "function": "copy_nbt",
+        "source": {
+            "type": "storage",
+            "source": "more_nbt:util"
+        },
+        "ops": [
+            {
+                "source": "block.EntityTag",
+                "target": "EntityTag",
+                "op": "replace"
+            }
+        ]
+    }
+]

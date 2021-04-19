@@ -1,6 +1,6 @@
 # Desc: resets all the util score's
 #
-# Called By: Other Functions
+# Called By: Multiple Functions
 
 scoreboard players reset Count util
 scoreboard players reset Int util

@@ -1,6 +1,6 @@
 # Desc: Runs "more_nbt_format" NBT.
 #
-# Called By: more_nbt:main_tick
+# Called By: more_nbt:reader_tick
 
 # currnet nbt_format:1
 

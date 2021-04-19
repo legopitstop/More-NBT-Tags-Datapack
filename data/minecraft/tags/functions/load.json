@@ -1,6 +1,8 @@
 {
    "replace": false,
    "values": [
-       "more_nbt:main_load"
+       "legopitstop:more_nbt_load",
+       "more_nbt:main_load",
+       "custom:entity"
    ]
 }
