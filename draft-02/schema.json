@@ -1,0 +1,1394 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "description": "Contains all the custom data for the More NBT Datapack.",
+    "title": "More NBT Datapack Schema",
+    "default": {},
+    "definitions": {
+        "Targets": {
+            "$id": "#/definitions/Targets",
+            "description": "The target context to execute against. Note that it does not except any tag filters, Example that will not work: @e[type=creeper,nbt={CustomName:'{\"text\":\"Creeper Aww Man!\"}'}]",
+            "enum": [
+                "this",
+                "@a",
+                "@s",
+                "@p",
+                "@e",
+                "@r"
+            ]
+        },
+        "Conditions": {
+            "$id": "#/definitions/Conditions"
+        },
+        "Trigger_Event": {
+            "$id": "#/definitions/Trigger_Event",
+            "description": "The event `id` to run",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9
+        },
+        "Events": {
+            "$id": "#/definitions/Events",
+            "properties": {
+                "cooldown": {
+                    "description": "Only for `on_use` trigger. Will have a cooldown to prevent spamming",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "value": {
+                            "description": "The amount of delay/cooldown. in ticks (sec * 20 = ticks)",
+                            "type": "integer"
+                        }
+                    }
+                },
+                "add_mob_effect": {
+                    "description": "Will give the target the selected effect(s).",
+                    "type": "array",
+                    "default": [
+                        {}
+                    ],
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "target": {
+                                "$ref": "#/definitions/Targets"
+                            },
+                            "effect": {
+                                "description": "The Minecraft effect",
+                                "type": "string"
+                            },
+                            "showIcon": {
+                                "description": "When true it will show the particles",
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                },
+                "remove_mob_effect": {
+                    "description": "Will remove the target the selected effect(s)",
+                    "type": "array",
+                    "default": [
+                        {}
+                    ],
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "target": {
+                                "$ref": "#/definitions/Targets"
+                            },
+                            "effect": {
+                                "description": "The Minecraft effect",
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "die": {
+                    "description": "will kill the target.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "target": {
+                            "$ref": "#/definitions/Targets"
+                        }
+                    }
+                },
+                "transform_item": {
+                    "description": "(May get remove) replace the currently held item with the new determined item.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "transform": {
+                            "description": "The item ID that will be replaced.",
+                            "type": "string"
+                        }
+                    }
+                },
+                "item": {
+                    "description": "This will copy and move the item to the new selected slot.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "type": {
+                            "description": "The type of entity to execute at. `block` or `entity`",
+                            "enum": [
+                                "minecraft:block",
+                                "minecraft:entity"
+                            ]
+                        },
+                        "slot": {
+                            "description": "The slot to execute at. `container.<0-26>`, `armor.<head|chest|legs|feet>`, or `weapon.<mainhand|offhand>`",
+                            "enum": [
+                                "container.0",
+                                "container.1",
+                                "container.2",
+                                "container.3",
+                                "container.4",
+                                "container.5",
+                                "container.6",
+                                "container.7",
+                                "container.8",
+                                "container.9",
+                                "container.10",
+                                "container.11",
+                                "container.12",
+                                "container.13",
+                                "container.14",
+                                "container.15",
+                                "container.16",
+                                "container.17",
+                                "container.18",
+                                "container.19",
+                                "container.20",
+                                "container.21",
+                                "container.22",
+                                "container.23",
+                                "container.24",
+                                "container.25",
+                                "container.26",
+                                "armor.head",
+                                "armor.chest",
+                                "armor.legs",
+                                "armor.feet",
+                                "weapon.mainhand",
+                                "weapon.offhand"
+                            ]
+                        },
+                        "pos": {
+                            "description": "type=block. The location of the block. Only supports [0,-1,0]",
+                            "default": [
+                                0,
+                                -1,
+                                0
+                            ],
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                        },
+                        "copy": {
+                            "description": "Copy data from a source.",
+                            "default": {},
+                            "properties": {
+                                "type": {
+                                    "description": "The type of entity to execute at. `block` or `entity`",
+                                    "enum": [
+                                        "minecraft:block",
+                                        "minecraft:entity"
+                                    ]
+                                },
+                                "slot": {
+                                    "description": "The slot to execute at. `container.<0-26>`, `armor.<head|chest|legs|feet>`, or `weapon.<mainhand|offhand>`",
+                                    "enum": [
+                                        "container.0",
+                                        "container.1",
+                                        "container.2",
+                                        "container.3",
+                                        "container.4",
+                                        "container.5",
+                                        "container.6",
+                                        "container.7",
+                                        "container.8",
+                                        "container.9",
+                                        "container.10",
+                                        "container.11",
+                                        "container.12",
+                                        "container.13",
+                                        "container.14",
+                                        "container.15",
+                                        "container.16",
+                                        "container.17",
+                                        "container.18",
+                                        "container.19",
+                                        "container.20",
+                                        "container.21",
+                                        "container.22",
+                                        "container.23",
+                                        "container.24",
+                                        "container.25",
+                                        "container.26",
+                                        "armor.head",
+                                        "armor.chest",
+                                        "armor.legs",
+                                        "armor.feet",
+                                        "weapon.mainhand",
+                                        "weapon.offhand"
+                                    ]
+                                },
+                                "pos": {
+                                    "description": "type=block. The location of the block. Only supports [0,-1,0]",
+                                    "default": [
+                                        0,
+                                        -1,
+                                        0
+                                    ],
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "merge_data": {
+                    "description": "will apply the data to the item.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "CustomModelData": {
+                            "description": "replaces the old tag with one stated in `value`.",
+                            "type": "object",
+                            "default": {},
+                            "properties": {
+                                "value": {
+                                    "description": "value it will replace",
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "Damage": {
+                            "description": "replaces the old tag with one stated in `value`.",
+                            "type": "object",
+                            "default": {},
+                            "properties": {
+                                "value": {
+                                    "description": "value it will replace",
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "HideFlags": {
+                            "description": "replaces the old tag with one stated in `value`.",
+                            "type": "object",
+                            "default": {},
+                            "properties": {
+                                "value": {
+                                    "description": "value it will replace",
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "Unbreakable": {
+                            "description": "replaces the old tag with one stated in `value`.",
+                            "type": "object",
+                            "default": {},
+                            "properties": {
+                                "value": {
+                                    "description": "value it will replace",
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                },
+                "show_text": {
+                    "description": "holds text-related objects.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "clear": {
+                            "description": "clears title, subtitle, and actionbar",
+                            "default": {},
+                            "properties": {
+                                "target": {
+                                    "$ref": "#/definitions/Targets"
+                                }
+                            }
+                        },
+                        "say": {
+                            "description": "says the message in chat",
+                            "default": {},
+                            "properties": {
+                                "text": {
+                                    "description": "The message to display.",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "tellraw": {
+                            "description": "says the formattable message in chat",
+                            "default": {},
+                            "properties": {
+                                "target": {
+                                    "$ref": "#/definitions/Targets"
+                                },
+                                "raw_text": {
+                                    "description": "The JSON Formatted text to show.",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "title": {
+                            "description": "text in front of a screen",
+                            "default": {},
+                            "properties": {
+                                "target": {
+                                    "$ref": "#/definitions/Targets"
+                                },
+                                "raw_text": {
+                                    "description": "The JSON Formatted text to show.",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "subtitle": {
+                            "description": "text below the title",
+                            "default": {},
+                            "properties": {
+                                "target": {
+                                    "$ref": "#/definitions/Targets"
+                                },
+                                "raw_text": {
+                                    "description": "The JSON Formatted text to show.",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "actionbar": {
+                            "description": "text above Hotbar",
+                            "default": {},
+                            "properties": {
+                                "target": {
+                                    "$ref": "#/definitions/Targets"
+                                },
+                                "raw_text": {
+                                    "description": "The JSON Formatted text to show.",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "decrement_stack": {
+                    "description": "removes one item from the stack.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "ignore_game_mode": {
+                            "description": "If true it will work even if the player is in creative mode.",
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "play_sound": {
+                    "description": "will play the sound.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "target": {
+                            "$ref": "#/definitions/Targets"
+                        },
+                        "sound": {
+                            "description": "The sound to play. Only some are currently supported.",
+                            "enum": [
+                                "minecraft:entity.snowball.throw",
+                                "minecraft:entity.egg.throw",
+                                "minecraft:entity.arrow.shoot",
+                                "minecraft:entity.ender_dragon.shoot",
+                                "minecraft:entity.ender_pearl.throw",
+                                "minecraft:entity.experience_bottle.throw",
+                                "minecraft:entity.ender_eye.launch",
+                                "minecraft:entity.firework_rocket.launch",
+                                "minecraft:entity.llama.spit",
+                                "minecraft:entity.wither.shoot",
+                                "minecraft:item.firecharge.use",
+                                "minecraft:block.chest.close",
+                                "minecraft:block.chest.locked",
+                                "minecraft:block.chest.open",
+                                "minecraft:block.ender_chest.close",
+                                "minecraft:block.ender_chest.open",
+                                "minecraft:block.barrel.close",
+                                "minecraft:block.barrel.open",
+                                "minecraft:item.armor.equip_chain",
+                                "minecraft:item.armor.equip_diamond",
+                                "minecraft:item.armor.equip_elytra",
+                                "minecraft:item.armor.equip_generic",
+                                "minecraft:item.armor.equip_gold",
+                                "minecraft:item.armor.equip_iron",
+                                "minecraft:item.armor.equip_leather",
+                                "minecraft:item.armor.equip_netherite",
+                                "minecraft:item.armor.equip_turtle",
+                                "minecraft:event.raid.horn"
+                            ]
+                        }
+                    }
+                },
+                "score": {
+                    "description": "add, remove, set scores on a scoreboard.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "add": {
+                            "description": "adds score",
+                            "type": "object",
+                            "default": {},
+                            "properties": {
+                                "name": {
+                                    "$ref": "#/definitions/Targets"
+                                },
+                                "objective": {
+                                    "description": "Objective. Must be \"score.test0-9\".",
+                                    "enum": [
+                                        "score.test.0",
+                                        "score.test.1",
+                                        "score.test.2",
+                                        "score.test.3",
+                                        "score.test.4",
+                                        "score.test.5",
+                                        "score.test.6",
+                                        "score.test.7",
+                                        "score.test.8",
+                                        "score.test.9"
+                                    ]
+                                },
+                                "amount": {
+                                    "description": "How much to add to the score",
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "set": {
+                            "description": "set score",
+                            "type": "object",
+                            "default": {},
+                            "properties": {
+                                "name": {
+                                    "$ref": "#/definitions/Targets"
+                                },
+                                "objective": {
+                                    "description": "Objective. Must be \"score.test0-9\".",
+                                    "enum": [
+                                        "score.test.0",
+                                        "score.test.1",
+                                        "score.test.2",
+                                        "score.test.3",
+                                        "score.test.4",
+                                        "score.test.5",
+                                        "score.test.6",
+                                        "score.test.7",
+                                        "score.test.8",
+                                        "score.test.9"
+                                    ]
+                                },
+                                "amount": {
+                                    "description": "What to set the score to",
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "remove": {
+                            "description": "remove score",
+                            "type": "object",
+                            "default": {},
+                            "properties": {
+                                "name": {
+                                    "$ref": "#/definitions/Targets"
+                                },
+                                "objective": {
+                                    "description": "Objective. Must be \"score.test0-9\".",
+                                    "enum": [
+                                        "score.test.0",
+                                        "score.test.1",
+                                        "score.test.2",
+                                        "score.test.3",
+                                        "score.test.4",
+                                        "score.test.5",
+                                        "score.test.6",
+                                        "score.test.7",
+                                        "score.test.8",
+                                        "score.test.9"
+                                    ]
+                                },
+                                "amount": {
+                                    "description": "How much to remove from the score",
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                },
+                "damage": {
+                    "description": "will deal damage to the target.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "target": {
+                            "$ref": "#/definitions/Targets"
+                        },
+                        "type": {
+                            "description": "The way to apply the damage: \"EFFECT\", \"ARROW\".",
+                            "enum": [
+                                "ARROW",
+                                "EFFECT"
+                            ]
+                        },
+                        "amount": {
+                            "description": "How many half hearts to apply to the target.",
+                            "type": "integer"
+                        }
+                    }
+                },
+                "reload": {
+                    "description": "will reload the server. If it is a modded server it will run reload confirm. Note that this event may require a OP to toggle it in settings.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "confirm": {
+                            "description": "Must be set to true for it to reload the server.",
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "random": {
+                    "description": "will output a random number from the min and max numbers.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "min": {
+                            "description": "The minimum number to use. Must be less than max.",
+                            "type": "integer"
+                        },
+                        "max": {
+                            "description": "The maximum number to use. Must be more than min.",
+                            "type": "integer"
+                        },
+                        "result": {
+                            "description": "This is the output integer. (SelectedItem.tag.<trigger event>.random.result)",
+                            "type": "integer"
+                        }
+                    }
+                },
+                "summon": {
+                    "description": "Summon an entity with optional nbt data.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "placement": {
+                            "description": "How to place the entity. This may change. Valid strings: \"ON_PLAYER\"",
+                            "enum": [
+                                "ON_PLAYER"
+                            ]
+                        },
+                        "entity": {
+                            "description": "The entity to summon.",
+                            "type": "string"
+                        },
+                        "nbt": {
+                            "description": "opt nbt that the entity has.",
+                            "type": "array",
+                            "items": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "structure": {
+                    "description": "places a structure",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "structure_name": {
+                            "description": "The structure to place. (default: more_nbt:test)",
+                            "type": "string"
+                        },
+                        "pos": {
+                            "description": "The position/ offset of the structure. using the schema [x, y, z]",
+                            "type": "array",
+                            "default": [
+                                0,
+                                1,
+                                0
+                            ],
+                            "items": {
+                                "type": "integer"
+                            }
+                        },
+                        "ignoreEntities": {
+                            "description": "opt place entities that are stored in the structure file.",
+                            "default": false,
+                            "type": "boolean"
+                        },
+                        "powered": {
+                            "description": "opt This will make the structure automatically load when the item is used. if false it will place the structure block. (default: true)",
+                            "default": true,
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "loot": {
+                    "description": "Get the loot from a loot table.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "target": {
+                            "$ref": "#/definitions/Targets"
+                        },
+                        "source": {
+                            "description": "Where to get the loot from. Valid strings: \"loot\",\"kill\"",
+                            "enum": [
+                                "loot",
+                                "kill"
+                            ]
+                        },
+                        "table": {
+                            "description": "The loot table to use. When source=loot.",
+                            "type": "string"
+                        },
+                        "entity": {
+                            "description": "The loot table to use. When source=kill.",
+                            "type": "object",
+                            "default": {},
+                            "properties": {
+                                "sort": {
+                                    "description": "Where to look for the entity. Valid strings: \"nearest\".",
+                                    "enum": [
+                                        "nearest"
+                                    ]
+                                },
+                                "type": {
+                                    "description": "Entity to look for. Excepts all entities.",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "set_block": {
+                    "description": "Set a block with optional data.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "block_type": {
+                            "description": "The block to place.",
+                            "type": "string"
+                        },
+                        "pos": {
+                            "description": "The position/ offset of the structure. using the schema [x, y, z]",
+                            "type": "array",
+                            "default": [
+                                0,
+                                1,
+                                0
+                            ],
+                            "items": {
+                                "type": "integer"
+                            }
+                        },
+                        "nbt": {
+                            "description": "Nbt data to apply to the block.",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "default": {}
+                            }
+                        },
+                        "blockstate": {
+                            "description": "block state to apply to the block.",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "run_commnad": {
+                    "description": "(not working) will run the command or commands.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "command": {
+                            "anyOf": [
+                                {
+                                    "description": "The command to run.",
+                                    "type": "string"
+                                },
+                                {
+                                    "description": "The command to run.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "properties": {
+        "moreNBT": {
+            "description": "Holds data used to let the datapack know that you want to run the custom NBT on this item, and if the nbt format is outdated.",
+            "type": "object",
+            "default": {},
+            "properties": {
+                "nbt_format": {
+                    "description": "The format of the More NBT Datapack Tags.",
+                    "type": "integer"
+                }
+            }
+        },
+        "damamge_tool": {
+            "description": "",
+            "type": "object",
+            "default": {},
+            "properties": {
+                "damage": {
+                    "description": "How much damage to remove from the tool.",
+                    "type": "integer"
+                },
+                "break_sound": {
+                    "description": "Use the break sound when the item has been consumed/broken. (may add more customizability to this.)",
+                    "type": "boolean"
+                },
+                "disappears": {
+                    "description": "Make the item disappear/turn into the air when broken. (may add more customizability to this.)",
+                    "type": "boolean"
+                }
+            }
+        },
+        "animation": {
+            "description": "Animated `CustomModelData` when held.",
+            "type": "object",
+            "default": {},
+            "properties": {
+                "looping": {
+                    "description": "Make the animation run year-round.",
+                    "type": "boolean"
+                },
+                "run": {
+                    "description": "The number of times to run the animation. only if looping is false.",
+                    "type": "integer"
+                },
+                "frametime": {
+                    "description": "The speed that it will flip through the models.",
+                    "type": "integer"
+                },
+                "frames": {
+                    "description": "The CustomModelData integer to apply at that frame.",
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "throwable": {
+            "description": "Throwable item componet. Throwable items, such as a snowball. Right now it is a bit buggy. This is planned to change. Only on minecraft:carrot_on_a_stick and minecraft:warped_fungus_on_a_stick.",
+            "type": "object",
+            "default": {},
+            "properties": {
+                "ammunition": {
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "entity": {
+                            "description": "The item/entity to throw.",
+                            "type": "string"
+                        },
+                        "nbt": {
+                            "description": "opt, nbt that the entity has.",
+                            "type": "array",
+                            "items": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "debugLog": {
+            "description": "If true it will give an output log via game chat.",
+            "type": "boolean",
+            "default": false
+        },
+        "durability": {
+            "description": "",
+            "type": "object",
+            "default": {},
+            "properties": {
+                "max_durability": {
+                    "description": "The max amount of damage the item has.",
+                    "type": "integer"
+                },
+                "display": {
+                    "description": "How to display the damage, leave blank to not show. Valid Strings: \"actionbarText\", \"actionbarBar\", \"actionbarPercent\",\"title\"",
+                    "anyOf": [
+                        {
+                            "type": "object",
+                            "default": {},
+                            "properties": {
+                                "type": {
+                                    "description": "The type of display to use. Valid Strings: \"bossbar\", \"custom\", \"customDurability\", \"actionbarBar\"",
+                                    "enum": [
+                                        "bossbar",
+                                        "custom",
+                                        "customDurability",
+                                        "actionbarBar"
+                                    ]
+                                },
+                                "value": {
+                                    "description": "type=custom This is the exact text to use for the actionbar. type=customDurability This is the text to apply after the current and max amounts. type=bossbar, name=custom This is the exact text to use for the bossbar.type=bossbar, name=customDurability This is the text to apply after the current and max amounts.",
+                                    "type": "string"
+                                },
+                                "color": {
+                                    "description": "type=bossbar This the color of the boss bar. Excepted values; default, blue, green, pink, purple, red, white, yellow",
+                                    "enum": [
+                                        "default",
+                                        "blue",
+                                        "green",
+                                        "pink",
+                                        "purple",
+                                        "red",
+                                        "white",
+                                        "yellow"
+                                    ]
+                                },
+                                "name": {
+                                    "description": "type=bossbar This the name of the boss bar. Excepted values; none, default, customisability, durability, percent, custom",
+                                    "enum": [
+                                        "none",
+                                        "default",
+                                        "customisability",
+                                        "durability",
+                                        "percent",
+                                        "custom"
+                                    ]
+                                },
+                                "color_theme": {
+                                    "description": "type=actionbarBar This the the color of the `actionbarBar`. Preset themes; aqua, blue, gray, green, purple, red, yellow, white Custom Colored Themes; orange, brown, cyan, pink",
+                                    "anyOf": [
+                                        {
+                                            "type": "object",
+                                            "default": {},
+                                            "properties": {
+                                                "progress": {
+                                                    "description": "The color of the progress bar. excepts all chat colors.",
+                                                    "enum": [
+                                                        "dark_red",
+                                                        "red",
+                                                        "gold",
+                                                        "yellow",
+                                                        "dark_green",
+                                                        "green",
+                                                        "aqua",
+                                                        "dark_aqua",
+                                                        "dark_blue",
+                                                        "blue",
+                                                        "light_purple",
+                                                        "dark_purple",
+                                                        "white",
+                                                        "gray",
+                                                        "dark_gray",
+                                                        "black"
+                                                    ]
+                                                },
+                                                "background": {
+                                                    "description": "The color of the background. excepts all chat colors.",
+                                                    "enum": [
+                                                        "dark_red",
+                                                        "red",
+                                                        "gold",
+                                                        "yellow",
+                                                        "dark_green",
+                                                        "green",
+                                                        "aqua",
+                                                        "dark_aqua",
+                                                        "dark_blue",
+                                                        "blue",
+                                                        "light_purple",
+                                                        "dark_purple",
+                                                        "white",
+                                                        "gray",
+                                                        "dark_gray",
+                                                        "black"
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "type": "string",
+                                            "enum": [
+                                                "aqua",
+                                                "blue",
+                                                "gray",
+                                                "green",
+                                                "purple",
+                                                "red",
+                                                "yellow",
+                                                "white",
+                                                "orange",
+                                                "brown",
+                                                "cyan",
+                                                "pink"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "type": "string",
+                            "enum": [
+                                "actionbarText",
+                                "actionbarBar",
+                                "actionbarPercent",
+                                "title"
+                            ]
+                        }
+                    ]
+                },
+                "custom_display": {
+                    "description": "add a custom display for durability.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "location": {
+                            "description": "Where to display the text. Valid Strings: \"actionbar\"",
+                            "enum": [
+                                "actionbar"
+                            ]
+                        },
+                        "values": {
+                            "description": "An array of Raw JSON formatted text to show at that value in 10% increments. [0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100%]",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "Inventory": {
+            "description": "",
+            "type": "object",
+            "default": {},
+            "properties": {
+                "can_be_siphoned_from": {
+                    "description": "Can hoppers suck items out of this inventory.",
+                    "type": "boolean"
+                },
+                "inventory_size": {
+                    "description": "(Not Functional) How many slots the inventory will have. default: 26",
+                    "type": "integer",
+                    "default": 26
+                },
+                "inventory_name": {
+                    "description": "The text to display inside the container/inventory. Excepts Raw JSON.",
+                    "type": "string"
+                },
+                "inventory_layout": {
+                    "description": "(Not Functional) How to layout the slots. Valid Strings: \"inline\",\"center=top\",\"center=bottom\",\"center=middle\"",
+                    "enum": [
+                        "inline",
+                        "center=top",
+                        "center=bottom",
+                        "center=middle"
+                    ]
+                },
+                "inventory_type": {
+                    "description": "The preset inventory to use. Valid Strings: \"chest\",\"hopper\"",
+                    "enum": [
+                        "chest",
+                        "hopper"
+                    ]
+                },
+                "display_block": {
+                    "description": "Display a different block inside the minecart.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "Name": {
+                            "description": "The name and id of the block",
+                            "type": "string"
+                        },
+                        "BlockStates": {
+                            "description": "If the block has optional block states you can place them here.",
+                            "type": "object",
+                            "default": {}
+                        }
+                    }
+                },
+                "auto_save": {
+                    "description": "Where to save the container items too.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "storage": {
+                            "description": "See #Storage Types for more",
+                            "enum": [
+                                "item",
+                                "enderChest",
+                                "cloud"
+                            ]
+                        },
+                        "save_fillers": {
+                            "description": "(Not Functional) When false it will attempt to not save the UI items.",
+                            "type": "boolean"
+                        },
+                        "visible": {
+                            "description": "Show the items via lore when the container isn't open, like shulker boxes.",
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "filter": {
+                    "description": "(Not Functional) white/blacklisted items that are allowed in the slots.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "whitelist": {
+                            "description": "Items that are allowed.",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "blacklist": {
+                            "description": "Items that are not allowed.",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "BlockTag": {
+            "description": "Will deal damage to the tool when used. Only on minecraft:armor_stand. More tags are planned to be added in the next version",
+            "type": "object",
+            "default": {},
+            "properties": {
+                "id": {
+                    "description": "The id of the custom block.",
+                    "type": "string"
+                },
+                "material": {
+                    "description": "The vanilla Minecraft block to use. Keep note of all the vanilla behaviors.",
+                    "type": "string"
+                },
+                "loot": {
+                    "description": "",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "ignore_gamemode": {
+                            "description": "when true the loot will drop no matter what game mode the player is in.",
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "type": {
+                            "description": "types: `loot` will use the table. `this` will drop the custom block.",
+                            "enum": [
+                                "minecraft:loot",
+                                "minecraft:this"
+                            ]
+                        },
+                        "table": {
+                            "description": "needed if type=loot. references a loot_table.",
+                            "type": "string"
+                        }
+                    }
+                },
+                "on_destory": {
+                    "description": "when the block has been broken. Event Trigger",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "event": {
+                            "$ref": "#/definitions/Trigger_Event"
+                        }
+                    }
+                }
+            }
+        },
+        "new_ui": {
+            "description": "These tags are used directly inside the item's tag. when you have the item in your hand it will use the following data to create the UI. Note that all the tags below are inside the object \"new_ui\".\"1\". 1 is the id of the UI currently only 1-10 are supported meaning you can add up to 10 unique UI's. Example: {new_ui:{1:{ <--below data--> }}}. Note that this will slow the server's TPS when using the item due to how much code needs to run to create the UI. May create a generator to easily, quickly create UI's.",
+            "type": "object",
+            "default": {},
+            "additionalProperties": {
+                "properties": {
+                    "display": {
+                        "description": "The name for the button that shows up in-game.",
+                        "type": "object",
+                        "properties": {
+                            "title": {
+                                "description": "The title of the UI located at the top. the default will use chest translation.",
+                                "default": "{\"translate\":\"container.chest\"}",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "buttons": {
+                        "description": "A item inside the Inventory that will do stuff when you click on it.",
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "description": "the name that will be on the button when you hover over it.",
+                                    "type": "string"
+                                },
+                                "slot": {
+                                    "description": "",
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 26
+                                },
+                                "custom_button": {
+                                    "description": "",
+                                    "type": "object",
+                                    "default": {},
+                                    "properties": {
+                                        "item": {
+                                            "description": "Minecraft item to use.",
+                                            "type": "string"
+                                        },
+                                        "count": {
+                                            "description": "The number of items to place in that slot.",
+                                            "type": "integer",
+                                            "minimum": 1,
+                                            "maximum": 64
+                                        },
+                                        "nbt": {
+                                            "description": "NBT data to apply to the item",
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "clickEvent": {
+                                    "description": "Make the button do stuff when you click on it.",
+                                    "type": "object",
+                                    "default": {},
+                                    "properties": {
+                                        "open_ui": {
+                                            "description": "Will open the next ui from the below ui",
+                                            "type": "object",
+                                            "default": {},
+                                            "properties": {
+                                                "id": {
+                                                    "description": "the id of the UI to open. Must be on the same item.",
+                                                    "type": "integer",
+                                                    "minimum": 0
+                                                }
+                                            }
+                                        },
+                                        "close_ui": {
+                                            "description": "When set to true it will kick the player from the UI.",
+                                            "type": "boolean",
+                                            "default": false
+                                        },
+                                        "event": {
+                                            "$ref": "#/definitions/Trigger_Event"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "fill_empty": {
+                        "anyOf": [
+                            {
+                                "description": "Define your own item.",
+                                "type": "object",
+                                "properties": {
+                                    "item": {
+                                        "description": "Item's id that will be placed in all the empty slots",
+                                        "type": "string"
+                                    },
+                                    "count": {
+                                        "description": "The number of items to place.",
+                                        "type": "integer",
+                                        "minimum": 1,
+                                        "maximum": 64
+                                    },
+                                    "nbt": {
+                                        "description": "The NBT to apply to this item.",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            {
+                                "description": "If set to true it will use a preset item, looks like the background when RP is installed.",
+                                "type": "boolean",
+                                "default": false
+                            }
+                        ]
+                    },
+                    "filler": {
+                        "description": "Place items to fill unwanted slots in the UI.",
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "slots": {
+                                    "description": "Contains all the slot numbers where it will place this item inside the UI.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer",
+                                        "minimum": 0,
+                                        "maximum": 26
+                                    }
+                                },
+                                "item": {
+                                    "description": "Item's id that will be placed in all the empty slots",
+                                    "type": "string"
+                                },
+                                "count": {
+                                    "description": "The number of items to place.",
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 64
+                                },
+                                "nbt": {
+                                    "description": "opt The NBT to apply to this item.",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "icon": {
+                        "description": "Place items to fill unwanted slots in the UI.",
+                        "type": "object",
+                        "properties": {
+                            "slots": {
+                                "description": "Contains all the slot numbers where it will place this item inside the UI.",
+                                "type": "array",
+                                "items": {
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 26
+                                }
+                            },
+                            "item": {
+                                "description": "Item's id that will be placed in all the empty slots",
+                                "type": "string"
+                            },
+                            "CustomModelData": {
+                                "description": "The CustomModelData tag for the item.",
+                                "type": "integer"
+                            },
+                            "count": {
+                                "description": "The number of items to place.",
+                                "type": "integer",
+                                "minimum": 1,
+                                "maximum": 64
+                            },
+                            "nbt": {
+                                "description": "opt The NBT to apply to this item.",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "inventory": {
+                        "description": "(Not added) Slots that will act as an inventory. This will contain all the same tags as the `Inventory` tag.",
+                        "type": "object",
+                        "default": {},
+                        "properties": {}
+                    }
+                }
+            }
+        },
+        "food": {
+            "description": "Tags that are only for food items.",
+            "type": "object",
+            "default": {},
+            "properties": {
+                "on_consume": {
+                    "description": "Event Trigger",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "event": {
+                            "$ref": "#/definitions/Trigger_Event"
+                        }
+                    }
+                },
+                "using_converts_to": {
+                    "description": "Will give the item when it is consumed.",
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "id": {
+                            "description": "The item's ID.",
+                            "type": "string"
+                        },
+                        "tag": {
+                            "description": "The item's optional NBT.",
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "on_use": {
+            "description": "Will trigger when the player clicks on the item (only works on some items.)",
+            "type": "object",
+            "default": {},
+            "properties": {
+                "event": {
+                    "$ref": "#/definitions/Trigger_Event"
+                }
+            }
+        },
+        "on_use_on": {
+            "description": "Will trigger when the player clicks on a block.",
+            "type": "object",
+            "default": {},
+            "properties": {
+                "event": {
+                    "$ref": "#/definitions/Trigger_Event"
+                }
+            }
+        },
+        "on_hold": {
+            "description": "Will trigger when the player holds the item in their `mainhand`",
+            "type": "object",
+            "default": {},
+            "properties": {
+                "event": {
+                    "$ref": "#/definitions/Trigger_Event"
+                }
+            }
+        },
+        "events": {
+            "description": "Runs events that are called by trigger events.",
+            "type": "object",
+            "default": {},
+            "properties": {
+                "1": {
+                    "$ref": "#/definitions/Events"
+                },
+                "2": {
+                    "$ref": "#/definitions/Events"
+                },
+                "3": {
+                    "$ref": "#/definitions/Events"
+                },
+                "4": {
+                    "$ref": "#/definitions/Events"
+                },
+                "5": {
+                    "$ref": "#/definitions/Events"
+                },
+                "6": {
+                    "$ref": "#/definitions/Events"
+                },
+                "7": {
+                    "$ref": "#/definitions/Events"
+                },
+                "8": {
+                    "$ref": "#/definitions/Events"
+                },
+                "9": {
+                    "$ref": "#/definitions/Events"
+                }
+            }
+        }
+    }
+}
