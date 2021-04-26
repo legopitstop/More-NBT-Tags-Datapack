@@ -720,41 +720,25 @@
         }
     },
     "properties": {
-        "moreNBT": {
-            "description": "Holds data used to let the datapack know that you want to run the custom NBT on this item, and if the nbt format is outdated.",
-            "type": "object",
-            "default": {},
-            "properties": {
-                "nbt_format": {
-                    "description": "The format of the More NBT Datapack Tags.",
-                    "type": "integer"
-                }
-            }
-        },
-        "damamge_tool": {
-            "description": "",
-            "type": "object",
-            "default": {},
-            "properties": {
-                "damage": {
-                    "description": "How much damage to remove from the tool.",
-                    "type": "integer"
-                },
-                "break_sound": {
-                    "description": "Use the break sound when the item has been consumed/broken. (may add more customizability to this.)",
-                    "type": "boolean"
-                },
-                "disappears": {
-                    "description": "Make the item disappear/turn into the air when broken. (may add more customizability to this.)",
-                    "type": "boolean"
-                }
-            }
-        },
         "animation": {
             "description": "Animated `CustomModelData` when held.",
             "type": "object",
             "default": {},
+            "required": [
+                "frametime",
+                "looping",
+                "play_frame_slot"
+            ],
             "properties": {
+                "play_frame_slot": {
+                    "description": "The slot that it needs to be in to play the animation",
+                    "enum": [
+                        "weapon.mainhand",
+                        "weapon.offhand",
+                        "inventory",
+                        "all"
+                    ]
+                },
                 "looping": {
                     "description": "Make the animation run year-round.",
                     "type": "boolean"
@@ -776,27 +760,80 @@
                 }
             }
         },
-        "throwable": {
-            "description": "Throwable item componet. Throwable items, such as a snowball. Right now it is a bit buggy. This is planned to change. Only on minecraft:carrot_on_a_stick and minecraft:warped_fungus_on_a_stick.",
+        "BlockTag": {
+            "description": "Will deal damage to the tool when used. Only on minecraft:armor_stand. More tags are planned to be added in the next version",
             "type": "object",
             "default": {},
+            "required": [
+                "id",
+                "material"
+            ],
             "properties": {
-                "ammunition": {
+                "id": {
+                    "description": "The id of the custom block.",
+                    "type": "string"
+                },
+                "material": {
+                    "description": "The vanilla Minecraft block to use. Keep note of all the vanilla behaviors.",
+                    "type": "string"
+                },
+                "loot": {
+                    "description": "The loot that will drop when you break the block.",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                        "type"
+                    ],
+                    "properties": {
+                        "ignore_gamemode": {
+                            "description": "when true the loot will drop no matter what game mode the player is in.",
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "type": {
+                            "description": "types: `loot` will use the table. `this` will drop the custom block.",
+                            "enum": [
+                                "minecraft:loot",
+                                "minecraft:this"
+                            ]
+                        },
+                        "table": {
+                            "description": "needed if type=loot. references a loot_table.",
+                            "type": "string"
+                        }
+                    }
+                },
+                "on_destory": {
+                    "description": "when the block has been broken. Event Trigger",
                     "type": "object",
                     "default": {},
                     "properties": {
-                        "entity": {
-                            "description": "The item/entity to throw.",
-                            "type": "string"
-                        },
-                        "nbt": {
-                            "description": "opt, nbt that the entity has.",
-                            "type": "array",
-                            "items": {
-                                "type": "object"
-                            }
+                        "event": {
+                            "$ref": "#/definitions/Trigger_Event"
                         }
                     }
+                }
+            }
+        },
+        "damage_tool": {
+            "description": "",
+            "type": "object",
+            "default": {},
+            "required": [
+                "damage"
+            ],
+            "properties": {
+                "damage": {
+                    "description": "How much damage to remove from the tool.",
+                    "type": "integer"
+                },
+                "break_sound": {
+                    "description": "Use the break sound when the item has been consumed/broken. (may add more customizability to this.)",
+                    "type": "boolean"
+                },
+                "disappears": {
+                    "description": "Make the item disappear/turn into the air when broken. (may add more customizability to this.)",
+                    "type": "boolean"
                 }
             }
         },
@@ -806,9 +843,12 @@
             "default": false
         },
         "durability": {
-            "description": "",
+            "description": "Add custom durability to the item.",
             "type": "object",
             "default": {},
+            "required": [
+                "max_durability"
+            ],
             "properties": {
                 "max_durability": {
                     "description": "The max amount of damage the item has.",
@@ -820,6 +860,9 @@
                         {
                             "type": "object",
                             "default": {},
+                            "required": [
+                                "type"
+                            ],
                             "properties": {
                                 "type": {
                                     "description": "The type of display to use. Valid Strings: \"bossbar\", \"custom\", \"customDurability\", \"actionbarBar\"",
@@ -963,10 +1006,86 @@
                 }
             }
         },
-        "Inventory": {
-            "description": "",
+        "events": {
+            "description": "Runs events that are called by trigger events.",
             "type": "object",
             "default": {},
+            "properties": {
+                "1": {
+                    "$ref": "#/definitions/Events"
+                },
+                "2": {
+                    "$ref": "#/definitions/Events"
+                },
+                "3": {
+                    "$ref": "#/definitions/Events"
+                },
+                "4": {
+                    "$ref": "#/definitions/Events"
+                },
+                "5": {
+                    "$ref": "#/definitions/Events"
+                },
+                "6": {
+                    "$ref": "#/definitions/Events"
+                },
+                "7": {
+                    "$ref": "#/definitions/Events"
+                },
+                "8": {
+                    "$ref": "#/definitions/Events"
+                },
+                "9": {
+                    "$ref": "#/definitions/Events"
+                }
+            }
+        },
+        "food": {
+            "description": "Tags that are only for food items.",
+            "type": "object",
+            "default": {},
+            "properties": {
+                "on_consume": {
+                    "description": "Event Trigger",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                        "event"
+                    ],
+                    "properties": {
+                        "event": {
+                            "$ref": "#/definitions/Trigger_Event"
+                        }
+                    }
+                },
+                "using_converts_to": {
+                    "description": "Will give the item when it is consumed.",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                        "id"
+                    ],
+                    "properties": {
+                        "id": {
+                            "description": "The item's ID.",
+                            "type": "string"
+                        },
+                        "tag": {
+                            "description": "The item's optional NBT.",
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "Inventory": {
+            "description": "Create a custom item that can store items.",
+            "type": "object",
+            "default": {},
+            "required": [
+                "inventory_type",
+                "auto_save"
+            ],
             "properties": {
                 "can_be_siphoned_from": {
                     "description": "Can hoppers suck items out of this inventory.",
@@ -1001,6 +1120,9 @@
                     "description": "Display a different block inside the minecart.",
                     "type": "object",
                     "default": {},
+                    "required": [
+                        "Name"
+                    ],
                     "properties": {
                         "Name": {
                             "description": "The name and id of the block",
@@ -1017,6 +1139,9 @@
                     "description": "Where to save the container items too.",
                     "type": "object",
                     "default": {},
+                    "required": [
+                        "storage"
+                    ],
                     "properties": {
                         "storage": {
                             "description": "See #Storage Types for more",
@@ -1059,51 +1184,20 @@
                 }
             }
         },
-        "BlockTag": {
-            "description": "Will deal damage to the tool when used. Only on minecraft:armor_stand. More tags are planned to be added in the next version",
+        "moreNBT": {
+            "description": "Holds data used to let the datapack know that you want to run the custom NBT on this item, and if the nbt format is outdated.",
             "type": "object",
             "default": {},
+            "required": [
+                "nbt_format"
+            ],
             "properties": {
-                "id": {
-                    "description": "The id of the custom block.",
-                    "type": "string"
-                },
-                "material": {
-                    "description": "The vanilla Minecraft block to use. Keep note of all the vanilla behaviors.",
-                    "type": "string"
-                },
-                "loot": {
-                    "description": "",
-                    "type": "object",
-                    "default": {},
-                    "properties": {
-                        "ignore_gamemode": {
-                            "description": "when true the loot will drop no matter what game mode the player is in.",
-                            "type": "boolean",
-                            "default": false
-                        },
-                        "type": {
-                            "description": "types: `loot` will use the table. `this` will drop the custom block.",
-                            "enum": [
-                                "minecraft:loot",
-                                "minecraft:this"
-                            ]
-                        },
-                        "table": {
-                            "description": "needed if type=loot. references a loot_table.",
-                            "type": "string"
-                        }
-                    }
-                },
-                "on_destory": {
-                    "description": "when the block has been broken. Event Trigger",
-                    "type": "object",
-                    "default": {},
-                    "properties": {
-                        "event": {
-                            "$ref": "#/definitions/Trigger_Event"
-                        }
-                    }
+                "nbt_format": {
+                    "description": "The format of the More NBT Datapack Tags.",
+                    "type": "integer",
+                    "default": 5,
+                    "minimum": 0,
+                    "maximum": 5
                 }
             }
         },
@@ -1116,6 +1210,9 @@
                     "display": {
                         "description": "The name for the button that shows up in-game.",
                         "type": "object",
+                        "required": [
+                            "title"
+                        ],
                         "properties": {
                             "title": {
                                 "description": "The title of the UI located at the top. the default will use chest translation.",
@@ -1141,9 +1238,13 @@
                                     "maximum": 26
                                 },
                                 "custom_button": {
-                                    "description": "",
+                                    "description": "use a custom item for the button.",
                                     "type": "object",
                                     "default": {},
+                                    "required": [
+                                        "item",
+                                        "count"
+                                    ],
                                     "properties": {
                                         "item": {
                                             "description": "Minecraft item to use.",
@@ -1170,6 +1271,9 @@
                                             "description": "Will open the next ui from the below ui",
                                             "type": "object",
                                             "default": {},
+                                            "required": [
+                                                "id"
+                                            ],
                                             "properties": {
                                                 "id": {
                                                     "description": "the id of the UI to open. Must be on the same item.",
@@ -1225,6 +1329,10 @@
                         "type": "array",
                         "items": {
                             "type": "object",
+                            "required": [
+                                "slots",
+                                "item"
+                            ],
                             "properties": {
                                 "slots": {
                                     "description": "Contains all the slot numbers where it will place this item inside the UI.",
@@ -1255,6 +1363,10 @@
                     "icon": {
                         "description": "Place items to fill unwanted slots in the UI.",
                         "type": "object",
+                        "required": [
+                            "slots",
+                            "item"
+                        ],
                         "properties": {
                             "slots": {
                                 "description": "Contains all the slot numbers where it will place this item inside the UI.",
@@ -1294,35 +1406,16 @@
                 }
             }
         },
-        "food": {
-            "description": "Tags that are only for food items.",
+        "on_hold": {
+            "description": "Will trigger when the player holds the item in their `mainhand`",
             "type": "object",
             "default": {},
+            "required": [
+                "event"
+            ],
             "properties": {
-                "on_consume": {
-                    "description": "Event Trigger",
-                    "type": "object",
-                    "default": {},
-                    "properties": {
-                        "event": {
-                            "$ref": "#/definitions/Trigger_Event"
-                        }
-                    }
-                },
-                "using_converts_to": {
-                    "description": "Will give the item when it is consumed.",
-                    "type": "object",
-                    "default": {},
-                    "properties": {
-                        "id": {
-                            "description": "The item's ID.",
-                            "type": "string"
-                        },
-                        "tag": {
-                            "description": "The item's optional NBT.",
-                            "type": "object"
-                        }
-                    }
+                "event": {
+                    "$ref": "#/definitions/Trigger_Event"
                 }
             }
         },
@@ -1330,6 +1423,9 @@
             "description": "Will trigger when the player clicks on the item (only works on some items.)",
             "type": "object",
             "default": {},
+            "required": [
+                "event"
+            ],
             "properties": {
                 "event": {
                     "$ref": "#/definitions/Trigger_Event"
@@ -1340,53 +1436,42 @@
             "description": "Will trigger when the player clicks on a block.",
             "type": "object",
             "default": {},
+            "required": [
+                "event"
+            ],
             "properties": {
                 "event": {
                     "$ref": "#/definitions/Trigger_Event"
                 }
             }
         },
-        "on_hold": {
-            "description": "Will trigger when the player holds the item in their `mainhand`",
+        "throwable": {
+            "description": "Throwable item componet. Throwable items, such as a snowball. Right now it is a bit buggy. This is planned to change. Only on minecraft:carrot_on_a_stick and minecraft:warped_fungus_on_a_stick.",
             "type": "object",
             "default": {},
+            "required": [
+                "ammunition"
+            ],
             "properties": {
-                "event": {
-                    "$ref": "#/definitions/Trigger_Event"
-                }
-            }
-        },
-        "events": {
-            "description": "Runs events that are called by trigger events.",
-            "type": "object",
-            "default": {},
-            "properties": {
-                "1": {
-                    "$ref": "#/definitions/Events"
-                },
-                "2": {
-                    "$ref": "#/definitions/Events"
-                },
-                "3": {
-                    "$ref": "#/definitions/Events"
-                },
-                "4": {
-                    "$ref": "#/definitions/Events"
-                },
-                "5": {
-                    "$ref": "#/definitions/Events"
-                },
-                "6": {
-                    "$ref": "#/definitions/Events"
-                },
-                "7": {
-                    "$ref": "#/definitions/Events"
-                },
-                "8": {
-                    "$ref": "#/definitions/Events"
-                },
-                "9": {
-                    "$ref": "#/definitions/Events"
+                "ammunition": {
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                        "entity"
+                    ],
+                    "properties": {
+                        "entity": {
+                            "description": "The item/entity to throw.",
+                            "type": "string"
+                        },
+                        "nbt": {
+                            "description": "opt, nbt that the entity has.",
+                            "type": "array",
+                            "items": {
+                                "type": "object"
+                            }
+                        }
+                    }
                 }
             }
         }
