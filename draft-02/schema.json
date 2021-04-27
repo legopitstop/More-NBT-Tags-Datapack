@@ -17,12 +17,240 @@
             ]
         },
         "Conditions": {
-            "$id": "#/definitions/Conditions"
+            "$id": "#/definitions/Conditions",
+            "description": "Used to make an event run only when the condition is true. Makes your code a little bit more customizable. conditions are similar to predicates",
+            "required": ["condition"],
+            "allOf": [
+                {
+                    "if": {
+                        "properties": {
+                            "condition": {
+                                "const": "minecraft:time_check"
+                            }
+                        }
+                    },
+                    "then": {
+                        "required": ["value"]
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "condition": {
+                                "const": "minecraft:weather_check"
+                            }
+                        }
+                    },
+                    "then": {
+                        "anyOf": [
+                            {
+                                "required": ["raining"]
+                            },
+                            {
+                                "required": ["thundering"]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "condition": {
+                                "const": "minecraft:match_tool"
+                            }
+                        }
+                    },
+                    "then": {
+                        "required": ["predicate"]
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "condition": {
+                                "const": "minecraft:entity_properties"
+                            }
+                        }
+                    },
+                    "then": {
+                        "required": ["entity","predicate"]
+                    }
+                }
+            ],
+            "properties": {
+                "condition": {
+                    "description": "The condition's ID.",
+                    "enum": [
+                        "minecraft:time_check",
+                        "minecraft:weather_check",
+                        "minecraft:match_tool",
+                        "minecraft:entity_properties"
+                    ]
+                },
+                "value": {
+                    "description": "The time value in ticks.",
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "min": {
+                                    "description": "The minimum value.",
+                                    "type": "integer"
+                                },
+                                "max": {
+                                    "description": "The maximum value.",
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    ]
+                },
+                "raining": {
+                    "description": "If true, the condition evaluates to true only if it's raining.",
+                    "type": "boolean"
+                },
+                "thundering": {
+                    "description": "If true, the condition evaluates to true only if it's thundering.",
+                    "type": "boolean"
+                },
+                "predicate": {
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "item": {
+                            "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/items.json#/definitions/MinecraftItemExamples"
+                        },
+                        "count": {
+                            "description": "Amount of the item.",
+                            "anyOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "min": {
+                                            "description": "The minimum value.",
+                                            "type": "integer"
+                                        },
+                                        "max": {
+                                            "description": "The maximum value.",
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        "nbt": {
+                            "description": "An NBT string.",
+                            "type": "string"
+                        },
+                        "type": {
+                            "description": "An entity ID.",
+                            "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/entities.json#/definitions/MinecraftEntityEnums"
+                        },
+                        "flags": {
+                            "description": "",
+                            "type": "object",
+                            "default": {},
+                            "properties": {
+                                "is_on_fire": {
+                                    "description": "Test whether the entity is or is not on fire.",
+                                    "type": "boolean"
+                                },
+                                "is_sleeping": {
+                                    "description": "Test whether the entity is or is not sleeping.",
+                                    "type": "boolean"
+                                },
+                                "is_jumping": {
+                                    "description": "Test whether the entity is or is not jumping.",
+                                    "type": "boolean"
+                                },
+                                "is_flying": {
+                                    "description": "Test whether the entity is or is not flying.",
+                                    "type": "boolean"
+                                },
+                                "is_falling": {
+                                    "description": "Test whether the entity is or is not falling.",
+                                    "type": "boolean"
+                                },
+                                "is_walking": {
+                                    "description": "Test whether the entity is or is not walking.",
+                                    "type": "boolean"
+                                },
+                                "is_sneaking": {
+                                    "description": "Test whether the entity is or is not sneaking.",
+                                    "type": "boolean"
+                                },
+                                "is_sprinting": {
+                                    "description": "Test whether the entity is or is not sprinting.",
+                                    "type": "boolean"
+                                },
+                                "is_swimming": {
+                                    "description": "Test whether the entity is or is not swimming.",
+                                    "type": "boolean"
+                                },
+                                "is_climbing": {
+                                    "description": "Test whether the entity is or is not climbing.",
+                                    "type": "boolean"
+                                },
+                                "is_in_water": {
+                                    "description": "Test whether the entity is or is not in water.",
+                                    "type": "boolean"
+                                },
+                                "is_in_lava": {
+                                    "description": "Test whether the entity is or is not in lava.",
+                                    "type": "boolean"
+                                },
+                                "is_in_cave": {
+                                    "description": "Test whether the entity is or is not in cave.",
+                                    "type": "boolean"
+                                },
+                                "is_in_void": {
+                                    "description": "Test whether the entity is or is not in void.",
+                                    "type": "boolean"
+                                },
+                                "is_on_ground": {
+                                    "description": "Test whether the entity is or is not on ground.",
+                                    "type": "boolean"
+                                },
+                                "is_holding_item": {
+                                    "description": "Test whether the entity is or is not holding an item.",
+                                    "type": "boolean"
+                                }
+                            }
+                        },
+                        "player": {
+                            "description": "Player properties to be checked. Fails when entity is not a player.",
+                            "type": "object",
+                            "default": {},
+                            "properties": {
+                                "gamemode": {
+                                    "description": "The game mode of the player. Must be survival, adventure, creative or spectator.",
+                                    "enum": [
+                                        "survival",
+                                        "adventure",
+                                        "creative",
+                                        "spectator"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "entity": {
+                    "$ref": "#/definitions/Targets"
+                }
+            }
         },
         "Trigger_Event": {
             "$id": "#/definitions/Trigger_Event",
             "description": "The event `id` to run",
             "type": "integer",
+            "default": 1,
             "minimum": 1,
             "maximum": 9
         },
@@ -771,7 +999,8 @@
             "properties": {
                 "id": {
                     "description": "The id of the custom block.",
-                    "type": "string"
+                    "type": "string",
+                    "pattern": "^[a-zA-Z0-9._]*.:.[a-zA-Z0-9._]*$"
                 },
                 "material": {
                     "description": "The vanilla Minecraft block to use. Keep note of all the vanilla behaviors.",
@@ -807,7 +1036,13 @@
                     "description": "when the block has been broken. Event Trigger",
                     "type": "object",
                     "default": {},
+                    "required": [
+                        "event"
+                    ],
                     "properties": {
+                        "conditions": {
+                            "$ref": "#/definitions/Conditions"
+                        },
                         "event": {
                             "$ref": "#/definitions/Trigger_Event"
                         }
@@ -1010,34 +1245,9 @@
             "description": "Runs events that are called by trigger events.",
             "type": "object",
             "default": {},
-            "properties": {
-                "1": {
-                    "$ref": "#/definitions/Events"
-                },
-                "2": {
-                    "$ref": "#/definitions/Events"
-                },
-                "3": {
-                    "$ref": "#/definitions/Events"
-                },
-                "4": {
-                    "$ref": "#/definitions/Events"
-                },
-                "5": {
-                    "$ref": "#/definitions/Events"
-                },
-                "6": {
-                    "$ref": "#/definitions/Events"
-                },
-                "7": {
-                    "$ref": "#/definitions/Events"
-                },
-                "8": {
-                    "$ref": "#/definitions/Events"
-                },
-                "9": {
-                    "$ref": "#/definitions/Events"
-                }
+            "propertyNames": {
+                "pattern": "^[1-9]$",
+                "$ref": "#/definitions/Events"
             }
         },
         "food": {
@@ -1053,6 +1263,9 @@
                         "event"
                     ],
                     "properties": {
+                        "conditions": {
+                            "$ref": "#/definitions/Conditions"
+                        },
                         "event": {
                             "$ref": "#/definitions/Trigger_Event"
                         }
@@ -1094,7 +1307,8 @@
                 "inventory_size": {
                     "description": "(Not Functional) How many slots the inventory will have. default: 26",
                     "type": "integer",
-                    "default": 26
+                    "default": 26,
+                    "multipleOf": 2
                 },
                 "inventory_name": {
                     "description": "The text to display inside the container/inventory. Excepts Raw JSON.",
@@ -1287,6 +1501,9 @@
                                             "type": "boolean",
                                             "default": false
                                         },
+                                        "conditions": {
+                                            "$ref": "#/definitions/Conditions"
+                                        },
                                         "event": {
                                             "$ref": "#/definitions/Trigger_Event"
                                         }
@@ -1414,6 +1631,9 @@
                 "event"
             ],
             "properties": {
+                "conditions": {
+                    "$ref": "#/definitions/Conditions"
+                },
                 "event": {
                     "$ref": "#/definitions/Trigger_Event"
                 }
@@ -1427,6 +1647,9 @@
                 "event"
             ],
             "properties": {
+                "conditions": {
+                    "$ref": "#/definitions/Conditions"
+                },
                 "event": {
                     "$ref": "#/definitions/Trigger_Event"
                 }
@@ -1440,6 +1663,9 @@
                 "event"
             ],
             "properties": {
+                "conditions": {
+                    "$ref": "#/definitions/Conditions"
+                },
                 "event": {
                     "$ref": "#/definitions/Trigger_Event"
                 }
