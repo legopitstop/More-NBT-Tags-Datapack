@@ -668,7 +668,7 @@
                         "block_type": {
                             "description": "The block to place.",
                             "type": "string",
-                            "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/blcoks.json#/definitions/MinecraftBlockExamples"
+                            "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/blocks.json#/definitions/MinecraftBlockExamples"
                         },
                         "pos": {
                             "description": "The position/ offset of the structure. using the schema [x, y, z]",
