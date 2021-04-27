@@ -54,7 +54,8 @@
                             },
                             "effect": {
                                 "description": "The Minecraft effect",
-                                "type": "string"
+                                "type": "string",
+                                "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/effects.json#/definitions/MinecraftEffectEnums"
                             },
                             "showIcon": {
                                 "description": "When true it will show the particles",
@@ -78,7 +79,8 @@
                             },
                             "effect": {
                                 "description": "The Minecraft effect",
-                                "type": "string"
+                                "type": "string",
+                                "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/effects.json#/definitions/MinecraftEffectEnums"
                             }
                         }
                     }
@@ -100,7 +102,8 @@
                     "properties": {
                         "transform": {
                             "description": "The item ID that will be replaced.",
-                            "type": "string"
+                            "type": "string",
+                            "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/items.json#/definitions/MinecraftItemExamples"
                         }
                     }
                 },
@@ -574,7 +577,8 @@
                         },
                         "entity": {
                             "description": "The entity to summon.",
-                            "type": "string"
+                            "type": "string",
+                            "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/entities.json#/definitions/MinecraftEntityExamples"
                         },
                         "nbt": {
                             "description": "opt nbt that the entity has.",
@@ -663,7 +667,8 @@
                     "properties": {
                         "block_type": {
                             "description": "The block to place.",
-                            "type": "string"
+                            "type": "string",
+                            "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/blcoks.json#/definitions/MinecraftBlockExamples"
                         },
                         "pos": {
                             "description": "The position/ offset of the structure. using the schema [x, y, z]",
@@ -694,7 +699,7 @@
                         }
                     }
                 },
-                "run_commnad": {
+                "run_command": {
                     "description": "(not working) will run the command or commands.",
                     "type": "object",
                     "default": {},
@@ -775,7 +780,8 @@
                 },
                 "material": {
                     "description": "The vanilla Minecraft block to use. Keep note of all the vanilla behaviors.",
-                    "type": "string"
+                    "type": "string",
+                    "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/blocks.json#/definitions/MinecraftBlockExamples"
                 },
                 "loot": {
                     "description": "The loot that will drop when you break the block.",
@@ -1068,7 +1074,8 @@
                     "properties": {
                         "id": {
                             "description": "The item's ID.",
-                            "type": "string"
+                            "type": "string",
+                            "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/items.json#/definitions/MinecraftItemExamples"
                         },
                         "tag": {
                             "description": "The item's optional NBT.",
@@ -1126,7 +1133,8 @@
                     "properties": {
                         "Name": {
                             "description": "The name and id of the block",
-                            "type": "string"
+                            "type": "string",
+                            "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/blocks.json#/definitions/MinecraftBlockExamples"
                         },
                         "BlockStates": {
                             "description": "If the block has optional block states you can place them here.",
@@ -1248,7 +1256,8 @@
                                     "properties": {
                                         "item": {
                                             "description": "Minecraft item to use.",
-                                            "type": "string"
+                                            "type": "string",
+                                            "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/items.json#/definitions/MinecraftItemExamples"
                                         },
                                         "count": {
                                             "description": "The number of items to place in that slot.",
@@ -1303,7 +1312,8 @@
                                 "properties": {
                                     "item": {
                                         "description": "Item's id that will be placed in all the empty slots",
-                                        "type": "string"
+                                        "type": "string",
+                                        "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/items.json#/definitions/MinecraftItemExamples"
                                     },
                                     "count": {
                                         "description": "The number of items to place.",
@@ -1345,7 +1355,8 @@
                                 },
                                 "item": {
                                     "description": "Item's id that will be placed in all the empty slots",
-                                    "type": "string"
+                                    "type": "string",
+                                    "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/items.json#/definitions/MinecraftItemExamples"
                                 },
                                 "count": {
                                     "description": "The number of items to place.",
@@ -1379,7 +1390,8 @@
                             },
                             "item": {
                                 "description": "Item's id that will be placed in all the empty slots",
-                                "type": "string"
+                                "type": "string",
+                                "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/items.json#/definitions/MinecraftItemExamples"
                             },
                             "CustomModelData": {
                                 "description": "The CustomModelData tag for the item.",
@@ -1462,7 +1474,8 @@
                     "properties": {
                         "entity": {
                             "description": "The item/entity to throw.",
-                            "type": "string"
+                            "type": "string",
+                            "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/entities.json#/definitions/MinecraftEntityExamples"
                         },
                         "nbt": {
                             "description": "opt, nbt that the entity has.",
