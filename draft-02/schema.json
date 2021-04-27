@@ -54,7 +54,6 @@
                             },
                             "effect": {
                                 "description": "The Minecraft effect",
-                                "type": "string",
                                 "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/effects.json#/definitions/MinecraftEffectEnums"
                             },
                             "showIcon": {
@@ -79,7 +78,6 @@
                             },
                             "effect": {
                                 "description": "The Minecraft effect",
-                                "type": "string",
                                 "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/effects.json#/definitions/MinecraftEffectEnums"
                             }
                         }
@@ -102,7 +100,6 @@
                     "properties": {
                         "transform": {
                             "description": "The item ID that will be replaced.",
-                            "type": "string",
                             "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/items.json#/definitions/MinecraftItemExamples"
                         }
                     }
@@ -577,7 +574,6 @@
                         },
                         "entity": {
                             "description": "The entity to summon.",
-                            "type": "string",
                             "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/entities.json#/definitions/MinecraftEntityExamples"
                         },
                         "nbt": {
@@ -667,7 +663,6 @@
                     "properties": {
                         "block_type": {
                             "description": "The block to place.",
-                            "type": "string",
                             "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/blocks.json#/definitions/MinecraftBlockExamples"
                         },
                         "pos": {
@@ -780,7 +775,6 @@
                 },
                 "material": {
                     "description": "The vanilla Minecraft block to use. Keep note of all the vanilla behaviors.",
-                    "type": "string",
                     "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/blocks.json#/definitions/MinecraftBlockExamples"
                 },
                 "loot": {
@@ -1074,7 +1068,6 @@
                     "properties": {
                         "id": {
                             "description": "The item's ID.",
-                            "type": "string",
                             "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/items.json#/definitions/MinecraftItemExamples"
                         },
                         "tag": {
@@ -1133,7 +1126,6 @@
                     "properties": {
                         "Name": {
                             "description": "The name and id of the block",
-                            "type": "string",
                             "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/blocks.json#/definitions/MinecraftBlockExamples"
                         },
                         "BlockStates": {
@@ -1256,7 +1248,6 @@
                                     "properties": {
                                         "item": {
                                             "description": "Minecraft item to use.",
-                                            "type": "string",
                                             "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/items.json#/definitions/MinecraftItemExamples"
                                         },
                                         "count": {
@@ -1312,7 +1303,6 @@
                                 "properties": {
                                     "item": {
                                         "description": "Item's id that will be placed in all the empty slots",
-                                        "type": "string",
                                         "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/items.json#/definitions/MinecraftItemExamples"
                                     },
                                     "count": {
@@ -1355,7 +1345,6 @@
                                 },
                                 "item": {
                                     "description": "Item's id that will be placed in all the empty slots",
-                                    "type": "string",
                                     "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/items.json#/definitions/MinecraftItemExamples"
                                 },
                                 "count": {
@@ -1390,7 +1379,6 @@
                             },
                             "item": {
                                 "description": "Item's id that will be placed in all the empty slots",
-                                "type": "string",
                                 "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/items.json#/definitions/MinecraftItemExamples"
                             },
                             "CustomModelData": {
@@ -1474,7 +1462,6 @@
                     "properties": {
                         "entity": {
                             "description": "The item/entity to throw.",
-                            "type": "string",
                             "$ref": "https://raw.githubusercontent.com/legopitstop/JSON-Schemas/main/minecraft/java-edition/entities.json#/definitions/MinecraftEntityExamples"
                         },
                         "nbt": {
