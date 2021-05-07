@@ -20,7 +20,9 @@
             "$id": "#/definitions/Conditions",
             "description": "Used to make an event run only when the condition is true. Makes your code a little bit more customizable. conditions are similar to predicates",
             "type": "array",
-            "default": [{}],
+            "default": [
+                {}
+            ],
             "items": {
                 "type": "object",
                 "required": [
@@ -1426,10 +1428,19 @@
             "properties": {
                 "nbt_format": {
                     "description": "The format of the More NBT Datapack Tags.",
-                    "type": "integer",
                     "default": 5,
-                    "minimum": 0,
-                    "maximum": 5
+                    "anyOf": [
+                        {
+                            "type": "string",
+                            "enum": [
+                                "IgnoreFormatOverride"
+                            ]
+                        },
+                        {
+                            "type": "integer",
+                            "minimum": 0
+                        }
+                    ]
                 }
             }
         },
